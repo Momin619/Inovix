@@ -4,19 +4,14 @@ import React, { lazy, Suspense } from "react";
 const ParticlesBackground = lazy(() => import("./ParticlesBackground"));
 
 const Hero = () => {
-  // Skip heavy particles on mobile
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 pt-20 sm:pt-0">
-      {/* Particle Background only on desktop */}
-      {!isMobile && (
-        <Suspense fallback={null}>
-          <div className="absolute inset-0 z-0">
-            <ParticlesBackground />
-          </div>
-        </Suspense>
-      )}
+      {/* Particle Background on all devices */}
+      <Suspense fallback={null}>
+        <div className="absolute inset-0 z-0">
+          <ParticlesBackground />
+        </div>
+      </Suspense>
 
       {/* Hero Content */}
       <div className="relative z-10 max-w-3xl">
