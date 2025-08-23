@@ -25,7 +25,7 @@ export default function ParticlesBackground() {
           color: { value: "#000000" },
         },
         particles: {
-          number: { value: 50, density: { enable: true, area: 800 } },
+          number: { value: 150, density: { enable: true, area: 800 } },
           color: { value: "#00ffff" },
           shape: { type: "triangle" },
           opacity: { value: 0.5 },

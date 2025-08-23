@@ -9,7 +9,7 @@ export default defineConfig({
     port: 5173,
     allowedHosts: [
       "6a60122c5012.ngrok-free.app",
-      "https://647btsnv-5173.inc1.devtunnels.ms", // add your ngrok host here
+      "e592e01cc8f4.ngrok-free.app", // add your ngrok host here
       "localhost", // keep localhost allowed too
     ],
   },
