@@ -44,7 +44,7 @@ const TrustedGlobe = () => {
           Trusted by Leading Companies Worldwide
         </h2>
         <p className="text-gray-400 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
-          Our solutions empower businesses across the globe.
+          Our solutions empower businesses across the globe
         </p>
       </div>
 
