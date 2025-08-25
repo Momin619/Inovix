@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import Globe from "./Globe";
 import * as THREE from "three";
 
-const RotatingGlobe = ({ onRadiusCalculated }) => {
+const RotatingGlobe = ({ defaultScale = 1, onRadiusCalculated }) => {
   const globeRef = useRef();
   const [globeRadius, setGlobeRadius] = useState(1);
 
@@ -26,7 +26,7 @@ const RotatingGlobe = ({ onRadiusCalculated }) => {
   });
 
   return (
-    <group ref={globeRef}>
+    <group ref={globeRef} scale={[defaultScale, defaultScale, defaultScale]}>
       <Globe />
     </group>
   );
