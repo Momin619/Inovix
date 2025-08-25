@@ -38,7 +38,7 @@ const TrustedGlobe = () => {
   }, []);
 
   return (
-    <section className="relative w-full flex flex-col items-center justify-center text-center overflow-hidden px-4 pt-10 sm:pt-16">
+    <section className="relative bg-black w-full flex flex-col items-center justify-center text-center overflow-hidden px-4 pt-10 sm:pt-16">
       <div className="relative z-10 max-w-3xl">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
           Trusted by Leading Companies Worldwide
