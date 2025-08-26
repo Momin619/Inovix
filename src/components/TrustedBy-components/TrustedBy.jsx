@@ -1,55 +1,52 @@
 // TrustedGlobe.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import RotatingGlobe from "./RotatingGlobe";
 
 const TrustedGlobe = () => {
   const [globeConfig, setGlobeConfig] = useState({
-    scale: 1,
-    cameraZ: 5,
+    scale: 0.15,
+    cameraZ: 3,
     sectionHeight: "100vh",
+    fov: 45,
   });
 
   const updateConfig = () => {
     const vw = window.innerWidth;
-    let scale = 1;
-    let cameraZ = 2.5;
-    let sectionHeight = "100vh";
+    const vh = window.innerHeight;
 
-    if (vw <= 480) {
-      scale = 0.14;
-      cameraZ = 2;
-      sectionHeight = "90vh";
-    } else if (vw <= 768) {
-      scale = 0.145;
-      cameraZ = 2.5;
-      sectionHeight = "80vh";
-    } else if (vw <= 1024) {
-      scale = 0.152;
-      cameraZ = 2.5;
-      sectionHeight = "100vh";
-    } else if (vw <= 1440) {
-      scale = 0.17;
-      cameraZ = 2.8;
-      sectionHeight = "95vh";
-    } else {
-      scale = 0.15;
-      cameraZ = 3;
-      sectionHeight = "100vh";
-    }
+    // Scale proportional to viewport and clamped
+    const scale = Math.min(Math.max(Math.min(vw, vh) / 1000, 0.12), 0.2);
+    const cameraZ = scale * 20;
+    const fov = vw < 480 ? 60 : 45;
+    const sectionHeight = `${vh}px`;
 
-    setGlobeConfig({ scale, cameraZ, sectionHeight });
+    setGlobeConfig({ scale, cameraZ, sectionHeight, fov });
   };
 
+  // Smooth resize: debounce
   useEffect(() => {
-    updateConfig(); // run on mount
-    window.addEventListener("resize", updateConfig);
-    return () => window.removeEventListener("resize", updateConfig);
+    updateConfig(); // initial
+    let timeout;
+    const handleResize = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(updateConfig, 100);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Memoize scale and cameraZ for performance
+  const memoizedScale = useMemo(() => globeConfig.scale, [globeConfig.scale]);
+  const memoizedCameraZ = useMemo(
+    () => globeConfig.cameraZ,
+    [globeConfig.cameraZ]
+  );
 
   return (
     <section
+      id="globe-section"
       style={{ height: globeConfig.sectionHeight, minHeight: "500px" }}
       className="relative bg-black w-full flex flex-col items-center justify-center text-center overflow-hidden px-4"
     >
@@ -64,27 +61,28 @@ const TrustedGlobe = () => {
       </div>
 
       {/* Globe wrapper */}
-      <div className="flex-1 w-full flex items-center justify-center">
-        <div className="w-full max-w-4xl h-[60vh] sm:h-[65vh] md:h-[70vh] lg:h-[75vh]">
-          <Canvas
-            camera={{
-              position: [0, 0, globeConfig.cameraZ],
-              fov: 45,
-            }}
-          >
-            <ambientLight intensity={0.7} />
-            <pointLight position={[10, 10, 10]} />
-            <RotatingGlobe defaultScale={globeConfig.scale} />
-
-            <OrbitControls
-              enableZoom={true}
-              minDistance={1.5}
-              maxDistance={globeConfig.cameraZ * 2}
-              autoRotate
-              autoRotateSpeed={0.5}
-            />
-          </Canvas>
-        </div>
+      <div className="w-full h-full flex items-center justify-center">
+        <Canvas
+          camera={{ position: [0, 0, memoizedCameraZ], fov: globeConfig.fov }}
+          style={{ width: "100%", height: "100%" }}
+          gl={{
+            antialias: true,
+            pixelRatio: Math.min(window.devicePixelRatio, 2),
+          }}
+        >
+          <ambientLight intensity={0.7} />
+          <pointLight position={[10, 10, 10]} />
+          <Suspense fallback={null}>
+            <RotatingGlobe defaultScale={memoizedScale} />
+          </Suspense>
+          <OrbitControls
+            enableZoom={true}
+            minDistance={memoizedCameraZ * 0.8}
+            maxDistance={memoizedCameraZ * 2}
+            autoRotate
+            autoRotateSpeed={window.innerWidth < 480 ? 0.2 : 0.5}
+          />
+        </Canvas>
       </div>
     </section>
   );

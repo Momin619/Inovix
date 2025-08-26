@@ -5,7 +5,7 @@ const ParticlesBackground = lazy(() => import("./ParticlesBackground"));
 
 const Hero = () => {
   return (
-    <section className="relative flex flex-col items-center  min-h-screen justify-start text-center overflow-hidden px-4 pt-24 pb-16">
+    <section className="relative flex flex-col items-center  justify-start text-center overflow-hidden px-4 pt-24 pb-16">
       {/* Particle Background */}
       <Suspense fallback={null}>
         <div className="absolute inset-0 z-0 h-full w-full">
