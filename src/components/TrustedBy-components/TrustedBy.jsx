@@ -6,28 +6,23 @@ import RotatingGlobe from "./RotatingGlobe";
 
 const TrustedGlobe = () => {
   const [globeConfig, setGlobeConfig] = useState({
-    scale: 0.15,
-    cameraZ: 3,
-    sectionHeight: "100vh",
-    fov: 45,
+    scale: 1,
+    cameraZ: 5,
   });
 
   const updateConfig = () => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // Scale proportional to viewport and clamped
-    const scale = Math.min(Math.max(Math.min(vw, vh) / 1000, 0.12), 0.2);
+    // Globe scale independent of section height
+    const scale = Math.min(vw, vh) / 1000;
     const cameraZ = scale * 20;
-    const fov = vw < 480 ? 60 : 45;
-    const sectionHeight = `${vh}px`;
 
-    setGlobeConfig({ scale, cameraZ, sectionHeight, fov });
+    setGlobeConfig({ scale, cameraZ });
   };
 
-  // Smooth resize: debounce
   useEffect(() => {
-    updateConfig(); // initial
+    updateConfig();
     let timeout;
     const handleResize = () => {
       clearTimeout(timeout);
@@ -37,7 +32,6 @@ const TrustedGlobe = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Memoize scale and cameraZ for performance
   const memoizedScale = useMemo(() => globeConfig.scale, [globeConfig.scale]);
   const memoizedCameraZ = useMemo(
     () => globeConfig.cameraZ,
@@ -46,9 +40,8 @@ const TrustedGlobe = () => {
 
   return (
     <section
-      id="globe-section"
-      style={{ height: globeConfig.sectionHeight, minHeight: "500px" }}
       className="relative bg-black w-full flex flex-col items-center justify-center text-center overflow-hidden px-4"
+      style={{ minHeight: "500px" }} // enough for content below
     >
       {/* Heading */}
       <div className="relative z-10 w-full max-w-5xl mb-6 px-4 text-center">
@@ -61,9 +54,9 @@ const TrustedGlobe = () => {
       </div>
 
       {/* Globe wrapper */}
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] flex items-center justify-center">
         <Canvas
-          camera={{ position: [0, 0, memoizedCameraZ], fov: globeConfig.fov }}
+          camera={{ position: [0, 0, memoizedCameraZ], fov: 45 }}
           style={{ width: "100%", height: "100%" }}
           gl={{
             antialias: true,
