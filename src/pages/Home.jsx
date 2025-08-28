@@ -1,9 +1,10 @@
 import React from "react";
-import Hero from "../components/Hero";
-import Navbar from "../components/Navbar";
-import TrustedBy from "../components/TrustedBy-components/TrustedBy";
-import Features from "../components/Features";
-import Testimonials from "../components/Testimonials";
+import Hero from "../components/Home-components/Hero";
+import Navbar from "../components/ui/Navbar";
+import TrustedBy from "../components/Home-components/TrustedBy-components/TrustedBy";
+import Features from "../components/Home-components/Features";
+import Testimonials from "../components/Home-components/Testimonials";
+import Footer from "../components/ui/Footer";
 export default function Home() {
   return (
     <div className="bg-black relative w-full">
@@ -12,6 +13,7 @@ export default function Home() {
       <TrustedBy /> {/* clean section without particles */}
       <Features />
       <Testimonials />
+      <Footer />
     </div>
   );
 }
