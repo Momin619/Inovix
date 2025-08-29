@@ -8,9 +8,10 @@ import {
   Users,
 } from "lucide-react";
 import { Fa1, Fa2, Fa3, Fa4, Fa5, Fa6 } from "react-icons/fa6";
-import { HiMiniArrowLongDown } from "react-icons/hi2"; // Long arrow
-
-export default function WorkflowPage() {
+import { HiMiniArrowLongDown } from "react-icons/hi2";
+import { useEffect, useRef } from "react";
+import NeonCardRunner from "./ui/NeonCardRunner";
+export default function WorkFlow() {
   const steps = [
     {
       numIcon: <Fa1 className="text-black text-lg" />,
@@ -50,6 +51,28 @@ export default function WorkflowPage() {
     },
   ];
 
+  const dashRefs = useRef([]);
+
+  useEffect(() => {
+    dashRefs.current.forEach((path) => {
+      if (!path) return;
+
+      const updateDash = () => {
+        const L = path.getTotalLength();
+        const stripLen = 15;
+        const gap = Math.max(1, L - stripLen);
+        path.style.strokeDasharray = `${stripLen} ${gap}`;
+        path.style.strokeDashoffset = "0";
+        document.documentElement.style.setProperty("--perimeter", L);
+      };
+
+      updateDash();
+      window.addEventListener("resize", updateDash);
+    });
+
+    return () => window.removeEventListener("resize", () => {});
+  }, []);
+
   return (
     <div className="bg-black text-white min-h-screen">
       {/* Hero Section */}
@@ -76,15 +99,12 @@ export default function WorkflowPage() {
       {/* Workflow Steps */}
       <section className="relative px-4 sm:px-6 py-20 flex flex-col items-center gap-12">
         {steps.map((step, index) => (
-          <div key={index} className="flex flex-col items-center w-full">
-            {/* Step Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative flex flex-col items-center text-center bg-zinc-900/70 backdrop-blur-lg rounded-2xl shadow-lg p-6 sm:p-8 w-[90%] sm:w-4/5 hover:scale-105 transition-transform duration-500"
-            >
+          <div
+            key={index}
+            className="relative w-[90%] sm:w-4/5 flex flex-col items-center"
+          >
+            {/* Card + Neon Runner Wrapper */}
+            <NeonCardRunner>
               {/* Step Number */}
               <span className="absolute -top-4 -left-4 bg-white w-10 h-10 flex items-center justify-center rounded-full shadow-md">
                 {step.numIcon}
@@ -102,9 +122,9 @@ export default function WorkflowPage() {
               <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                 {step.desc}
               </p>
-            </motion.div>
+            </NeonCardRunner>
 
-            {/* Arrow (only between steps, no animation) */}
+            {/* Arrow */}
             {index < steps.length - 1 && (
               <HiMiniArrowLongDown className="w-8 sm:w-10 h-8 sm:h-10 text-[#00ffce] mt-6" />
             )}

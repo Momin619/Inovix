@@ -1,0 +1,52 @@
+:root {
+  --runner-len: 60; /* glowing dash length */
+  --runner-thick: 2.5; /* neon thickness */
+  --neon: #00fff7;
+  --speed: 60s; /* smaller = faster */
+  --offset: 2px;
+}
+
+.cardWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.runnerWrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  z-index: 1;
+}
+
+.runner {
+  position: absolute;
+  top: calc(-1 * var(--offset));
+  left: calc(-1 * var(--offset));
+  width: calc(100% + (var(--offset) * 2));
+  height: calc(100% + (var(--offset) * 2));
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px var(--neon)) drop-shadow(0 0 16px var(--neon))
+    drop-shadow(0 0 32px var(--neon)) drop-shadow(0 0 48px var(--neon));
+}
+
+.runner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.borderPath {
+  fill: none;
+  stroke: var(--neon);
+  stroke-width: var(--runner-thick);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: dash var(--speed) linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000; /* always negative so it flows forward */
+  }
+}
