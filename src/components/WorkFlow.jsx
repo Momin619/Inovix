@@ -11,6 +11,8 @@ import { Fa1, Fa2, Fa3, Fa4, Fa5, Fa6 } from "react-icons/fa6";
 import { HiMiniArrowLongDown } from "react-icons/hi2";
 import { useEffect, useRef } from "react";
 import NeonCardRunner from "./ui/NeonCardRunner";
+import Footer from "./ui/Footer";
+import Navbar from "./ui/Navbar";
 export default function WorkFlow() {
   const steps = [
     {
@@ -74,63 +76,67 @@ export default function WorkFlow() {
   }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen">
-      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center text-center py-20 px-6 bg-gradient-to-b from-zinc-900 via-black to-zinc-900">
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
-        >
-          Our Workflow
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="max-w-2xl text-gray-300 text-lg md:text-xl"
-        >
-          A seamless process that transforms your ideas into world-class
-          products. Transparent, efficient, and client-focused at every stage.
-        </motion.p>
-      </section>
-
-      {/* Workflow Steps */}
-      <section className="relative px-4 sm:px-6 py-20 flex flex-col items-center gap-12">
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="relative w-[90%] sm:w-4/5 flex flex-col items-center"
+    <>
+      <Navbar />
+      <div className="bg-black text-white min-h-screen">
+        {/* Hero Section */}
+        <section className="relative flex flex-col items-center justify-center text-center py-20 px-6 bg-gradient-to-b from-zinc-900 via-black to-zinc-900">
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
           >
-            {/* Card + Neon Runner Wrapper */}
-            <NeonCardRunner>
-              {/* Step Number */}
-              <span className="absolute -top-4 -left-4 bg-white w-10 h-10 flex items-center justify-center rounded-full shadow-md">
-                {step.numIcon}
-              </span>
+            Our Workflow
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="max-w-2xl text-gray-300 text-lg md:text-xl"
+          >
+            A seamless process that transforms your ideas into world-class
+            products. Transparent, efficient, and client-focused at every stage.
+          </motion.p>
+        </section>
 
-              {/* Main Icon */}
-              <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-zinc-800 shadow-lg mb-6">
-                {step.icon}
-              </div>
+        {/* Workflow Steps */}
+        <section className="relative px-4 sm:px-6 py-20 flex flex-col items-center gap-12">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="relative w-[90%] sm:w-4/5 flex flex-col items-center"
+            >
+              {/* Card + Neon Runner Wrapper */}
+              <NeonCardRunner>
+                {/* Step Number */}
+                <span className="absolute -top-4 -left-4 bg-white w-10 h-10 flex items-center justify-center rounded-full shadow-md">
+                  {step.numIcon}
+                </span>
 
-              {/* Title + Description */}
-              <h3 className="text-xl sm:text-2xl font-bold mb-3">
-                {step.title}
-              </h3>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                {step.desc}
-              </p>
-            </NeonCardRunner>
+                {/* Main Icon */}
+                <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-zinc-800 shadow-lg mb-6">
+                  {step.icon}
+                </div>
 
-            {/* Arrow */}
-            {index < steps.length - 1 && (
-              <HiMiniArrowLongDown className="w-8 sm:w-10 h-8 sm:h-10 text-[#00ffce] mt-6" />
-            )}
-          </div>
-        ))}
-      </section>
-    </div>
+                {/* Title + Description */}
+                <h3 className="text-xl sm:text-2xl font-bold mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                  {step.desc}
+                </p>
+              </NeonCardRunner>
+
+              {/* Arrow */}
+              {index < steps.length - 1 && (
+                <HiMiniArrowLongDown className="w-8 sm:w-10 h-8 sm:h-10 text-[#00ffce] mt-6" />
+              )}
+            </div>
+          ))}
+        </section>
+      </div>
+      <Footer />
+    </>
   );
 }
