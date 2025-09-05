@@ -39,11 +39,16 @@ export default function AboutUs() {
     },
   ];
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-black via-[#0a0f1f] to-black text-[#00ffce]">
-      {/* Subtle Grid Background */}
+    <div className="relative bg-gradient-to-br from-black via-[#0a0f1f] to-black text-[#00ffce] overflow-hidden">
+      {/* Grid Background */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-60"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(0,255,206,0.05) 1px, transparent 1px),
@@ -53,32 +58,43 @@ export default function AboutUs() {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+      {/* Neon Glow Orbs */}
+      <div className="absolute top-16 left-2 sm:top-20 sm:left-6 w-36 h-36 sm:w-40 sm:h-40 bg-[#00ffce]/50 rounded-full blur-3xl shadow-[0_0_180px_90px_#00ffceaa] z-0" />
+      <div className="absolute bottom-16 right-2 sm:bottom-32 sm:right-10 w-48 h-48 sm:w-56 sm:h-56 bg-purple-600/50 rounded-full blur-3xl shadow-[0_0_200px_100px_rgba(168,85,247,0.6)] z-0" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 flex flex-col gap-12 sm:gap-16">
         {/* Heading */}
         <motion.h1
-          className="text-5xl md:text-6xl font-extrabold text-center mb-12"
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-center drop-shadow-[0_0_30px_#00ffceaa]"
+          initial="hidden"
+          animate="show"
+          variants={fadeUp}
         >
-          About <span className="text-white">Inovix</span>
+          About{" "}
+          <span className="text-white drop-shadow-[0_0_25px_#ffffffaa]">
+            Inovix
+          </span>
         </motion.h1>
 
         {/* Intro */}
         <motion.p
-          className="text-lg md:text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 1 }}
+          className="text-sm sm:text-base md:text-lg text-gray-300 text-center max-w-3xl mx-auto leading-relaxed"
+          initial="hidden"
+          animate="show"
+          variants={fadeUp}
+          transition={{ delay: 0.2 }}
         >
-          At <span className="text-[#00ffce] font-semibold">Inovix</span>, we
-          are a team of innovators, engineers, and creators dedicated to
+          At{" "}
+          <span className="text-[#00ffce] font-semibold drop-shadow-[0_0_20px_#00ffceaa]">
+            Inovix
+          </span>
+          , we are a team of innovators, engineers, and creators dedicated to
           building software that redefines industries and empowers businesses
           worldwide.
         </motion.p>
 
-        {/* Mission + Vision Cards */}
-        <div className="grid md:grid-cols-2 gap-12">
+        {/* Mission + Vision */}
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
           {[
             {
               title: "Our Mission",
@@ -88,102 +104,103 @@ export default function AboutUs() {
               title: "Our Vision",
               desc: "To lead globally by creating ecosystems that push the boundaries of technology.",
             },
-          ].map((item, index) => (
+          ].map((item, i) => (
             <motion.div
-              key={index}
-              className="p-6 bg-black/50 border border-[#00ffce]/20 rounded-2xl shadow-lg hover:scale-105 hover:border-[#00ffce] transition-all"
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 + index * 0.3, duration: 0.8 }}
-              whileHover={{ rotate: 1 }}
+              key={i}
+              className="relative p-5 sm:p-6 bg-black/60 border border-[#00ffce]/50 rounded-2xl shadow-[0_0_35px_#00ffce77] overflow-hidden"
+              initial={{ opacity: 0, y: i % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: i * 0.2 }}
+              viewport={{ once: true }}
             >
-              <h2 className="text-2xl font-bold mb-4 text-white">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 text-white drop-shadow-[0_0_18px_#ffffffaa]">
                 {item.title}
               </h2>
-              <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+              <p className="text-gray-400 text-sm sm:text-base md:text-base leading-relaxed">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
 
         {/* Core Values */}
         <motion.div
-          className="mt-20"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 1 }}
+          className="mt-12 sm:mt-16"
+          initial="hidden"
+          whileInView="show"
+          variants={fadeUp}
+          viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-center mb-10 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-center mb-6 sm:mb-8 text-white drop-shadow-[0_0_25px_#00ffceaa]">
             Core Values
           </h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {values.map((val, i) => (
               <motion.div
                 key={i}
-                className="p-6 bg-black/60 border border-[#00ffce]/20 rounded-xl text-center hover:-translate-y-2 transition-transform"
-                whileHover={{ scale: 1.08, borderColor: "#00ffce" }}
+                className="relative p-5 sm:p-6 bg-black/70 border border-[#00ffce]/50 rounded-xl text-center shadow-[0_0_40px_#00ffce88] overflow-hidden group"
+                whileHover={{ scale: 1.06, y: -4 }}
+                transition={{ type: "spring", stiffness: 120 }}
               >
-                <h3 className="text-xl font-semibold text-white mb-2">
+                {/* Neon overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-50 transition-all duration-500 bg-gradient-to-tr from-[#00ffce]/30 to-purple-600/30 rounded-xl blur-xl"></div>
+                <h3 className="relative z-10 text-lg sm:text-xl md:text-xl font-semibold text-white mb-1 sm:mb-2 drop-shadow-[0_0_25px_#00ffceaa]">
                   {val.title}
                 </h3>
-                <p className="text-gray-400">{val.desc}</p>
+                <p className="relative z-10 text-gray-400 text-sm sm:text-base md:text-base">
+                  {val.desc}
+                </p>
+                <div className="absolute inset-0 border-2 border-[#00ffce] rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Timeline Section */}
+        {/* Timeline */}
         <motion.div
-          className="mt-20"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 1 }}
+          className="mt-12 sm:mt-16"
+          initial="hidden"
+          whileInView="show"
+          variants={fadeUp}
+          viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-center mb-10 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-center mb-8 sm:mb-12 text-white drop-shadow-[0_0_25px_#00ffceaa]">
             Our Journey
           </h2>
-          <div className="relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-[#00ffce]/30 transform -translate-x-1/2"></div>
+          <div className="relative max-w-4xl mx-auto">
+            {/* Central glowing line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#00ffce] to-purple-600 transform -translate-x-1/2 rounded-full shadow-[0_0_50px_#00ffceaa]"></div>
+
             {timeline.map((event, index) => (
               <motion.div
                 key={index}
-                className={`mb-12 flex flex-col md:flex-row items-center ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                className={`relative mb-10 flex flex-col sm:flex-row items-center ${
+                  index % 2 === 0 ? "sm:justify-start" : "sm:justify-end"
                 }`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? 80 : -80 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.3 + index * 0.3, duration: 0.8 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
               >
-                <div className="md:w-1/2 p-6 bg-black/60 border border-[#00ffce]/20 rounded-xl shadow-md hover:shadow-[#00ffce]/40 hover:scale-105 transition-all">
-                  <h3 className="text-xl font-semibold text-white">
+                {/* Connector dot */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-5 sm:w-6 h-5 sm:h-6 bg-[#00ffce] rounded-full shadow-[0_0_35px_#00ffce] border-2 border-white"></div>
+
+                {/* Event Card */}
+                <div
+                  className={`w-full sm:w-[46%] p-4 sm:p-6 rounded-2xl bg-black/70 border border-transparent bg-clip-padding relative bg-gradient-to-r from-[#00ffce44] to-[#6d28d944] backdrop-blur-md shadow-[0_0_45px_#00ffce77] mb-4 sm:mb-0 ${
+                    index % 2 === 0 ? "text-left" : "text-right"
+                  }`}
+                >
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white drop-shadow-[0_0_20px_#ffffffaa]">
                     {event.year} — {event.title}
                   </h3>
-                  <p className="text-gray-400 mt-2">{event.desc}</p>
+                  <p className="text-gray-400 text-sm sm:text-base md:text-base mt-1">
+                    {event.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Call To Action */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 1 }}
-        >
-          <h2 className="text-3xl font-bold mb-4 text-white">
-            Let’s Build the Future Together
-          </h2>
-          <p className="text-gray-400 mb-6">
-            Partner with Inovix and take your digital vision to the next level.
-          </p>
-          <motion.a
-            href="/contact"
-            className="px-8 py-3 text-lg font-semibold rounded-xl border border-[#00ffce] hover:bg-[#00ffce] hover:text-black transition-all duration-300 inline-block"
-            whileHover={{ scale: 1.1, rotate: 1 }}
-          >
-            Contact Us
-          </motion.a>
         </motion.div>
       </div>
     </div>

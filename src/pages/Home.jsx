@@ -5,15 +5,22 @@ import TrustedBy from "../components/Home-components/TrustedBy-components/Truste
 import Features from "../components/Home-components/Features";
 import Testimonials from "../components/Home-components/Testimonials";
 import Footer from "../components/ui/Footer";
+import { Helmet } from "react-helmet";
 export default function Home() {
   return (
-    <div className="bg-black relative w-full">
-      <Navbar />
-      <Hero /> {/* particles only inside this section */}
-      <TrustedBy /> {/* clean section without particles */}
-      <Features />
-      <Testimonials />
-      <Footer />
-    </div>
+    <>
+      <Helmet>
+        <title>Inovix</title>
+      </Helmet>
+
+      <div className="bg-black relative w-full">
+        <Navbar />
+        <Hero /> {/* particles only inside this section */}
+        <TrustedBy /> {/* clean section without particles */}
+        <Features />
+        <Testimonials />
+        <Footer />
+      </div>
+    </>
   );
 }
