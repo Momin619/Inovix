@@ -10,6 +10,7 @@ export default function About() {
         <title>About Us | Inovix</title>
       </Helmet>
       <Navbar />
+
       <AboutUs />
       <Footer />
     </>

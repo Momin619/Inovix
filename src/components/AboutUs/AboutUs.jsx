@@ -45,7 +45,7 @@ export default function AboutUs() {
   };
 
   return (
-    <div className="relative bg-gradient-to-br from-black via-[#0a0f1f] to-black text-[#00ffce] overflow-hidden">
+    <div className="relative pt-10 bg-gradient-to-br from-black via-[#0a0f1f] to-black text-[#00ffce] overflow-hidden">
       {/* Grid Background */}
       <div
         className="absolute inset-0 opacity-60"
