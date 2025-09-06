@@ -1,0 +1,32 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes neonBorder {
+  0% {
+    border-color: #00ffce;
+    box-shadow: 0 0 15px #00ffce55;
+  }
+  50% {
+    border-color: #00c6ff;
+    box-shadow: 0 0 25px #00c6ff55;
+  }
+  100% {
+    border-color: #00ffce;
+    box-shadow: 0 0 15px #00ffce55;
+  }
+}
+
+.shimmer {
+  animation: shimmer 4s linear infinite;
+  background-size: 200% auto;
+}
+
+.neonBorder {
+  animation: neonBorder 5s linear infinite;
+}
