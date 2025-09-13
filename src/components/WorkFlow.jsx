@@ -78,17 +78,13 @@ export default function WorkFlow() {
   return (
     <>
       <Navbar />
-      <div className="bg-black text-white min-h-screen">
+      <div className="bg-black  text-white min-h-screen">
         {/* Hero Section */}
         <section className="relative flex flex-col items-center justify-center text-center py-20 px-6 bg-gradient-to-b from-zinc-900 via-black to-zinc-900">
-          <motion.h1
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
-          >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center my-10 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
             Our Workflow
-          </motion.h1>
+          </h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

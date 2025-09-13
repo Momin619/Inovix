@@ -24,12 +24,12 @@ export default function Project() {
         {
           name: "E-Commerce Store",
           tech: "React, Node.js, MongoDB",
-          img: "https://picsum.photos/id/1015/500/300",
+          img: "/images/Projects-images/e-commerce.png",
         },
         {
           name: "Portfolio Platform",
           tech: "Next.js, Tailwind",
-          img: "https://picsum.photos/id/1005/500/300",
+          img: "/images/Projects-images/1.png",
         },
         {
           name: "SaaS Dashboard",
@@ -295,17 +295,17 @@ export default function Project() {
   ];
 
   return (
-    <div className="bg-black min-h-screen text-white px-4 sm:px-6 md:px-16 lg:px-20 py-16 md:py-24">
+    <div className="bg-black min-h-screen text-white px-4 sm:px-6 md:px-16 lg:px-20  py-20 md:py-24">
       <motion.h1
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r leading-tight from-cyan-400 via-pink-400 to-purple-400"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center my-10 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 leading-tight"
       >
         Our Projects
       </motion.h1>
 
-      <div className="grid gap-8 sm:gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid my-20 gap-8 sm:gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {categories.map((cat, i) => (
           <motion.div
             key={i}

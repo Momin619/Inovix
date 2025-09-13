@@ -98,7 +98,7 @@ export default function AboutUs() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 flex flex-col gap-12 sm:gap-16">
         {/* Heading */}
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center drop-shadow-[0_0_30px_#00ffceaa]"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-center  drop-shadow-[0_0_30px_#00ffceaa]"
           initial="hidden"
           animate="show"
           variants={fadeUp}

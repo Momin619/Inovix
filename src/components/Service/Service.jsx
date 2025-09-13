@@ -35,6 +35,24 @@ const services = [
   },
 ];
 
+// Variants for animation
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 export default function Service() {
   return (
     <section className="py-24 bg-black relative overflow-hidden">
@@ -45,37 +63,37 @@ export default function Service() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Heading */}
         <motion.h2
-          className="text-3xl sm:text-5xl font-extrabold text-center text-white drop-shadow-[0_0_35px_#00ffceaa]"
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl my-10 font-extrabold text-center text-white drop-shadow-[0_0_35px_#00ffceaa]"
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
         >
           Our <span className="text-[#00ffce]">Services</span>
         </motion.h2>
+
+        {/* Paragraph */}
         <motion.p
           className="mt-4 text-center text-gray-400 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          viewport={{ once: true }}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          transition={{ delay: 0.2 }}
         >
           Combining creativity, technology, and innovation to build
           next-generation digital solutions.
         </motion.p>
 
         {/* Services Grid */}
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <motion.div
+          className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
           {services.map((service, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: i * 0.15 }}
-              viewport={{ once: true }}
-            >
+            <motion.div key={i} variants={item}>
               <Tilt
-                glareEnable={true}
+                glareEnable={window.innerWidth > 640}
                 glareMaxOpacity={0.3}
                 tiltMaxAngleX={15}
                 tiltMaxAngleY={15}
@@ -95,7 +113,7 @@ export default function Service() {
               </Tilt>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
