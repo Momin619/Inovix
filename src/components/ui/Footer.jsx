@@ -47,7 +47,7 @@ export default function Footer() {
                 href="mailto:info@inovix.com"
                 className="hover:text-cyan-400 transition"
               >
-                info@inovix.com
+                inovix@gmail.com
               </a>
             </li>
             <li>
@@ -61,21 +61,6 @@ export default function Footer() {
             </li>
             <li>Location: Bahria Town, Rawalpindi</li>
           </ul>
-
-          <div className="flex space-x-4 mt-4">
-            <a href="#" className="hover:text-cyan-400 transition">
-              <FaFacebook size={20} />
-            </a>
-            <a href="#" className="hover:text-cyan-400 transition">
-              <FaTwitter size={20} />
-            </a>
-            <a href="#" className="hover:text-cyan-400 transition">
-              <FaLinkedin size={20} />
-            </a>
-            <a href="#" className="hover:text-cyan-400 transition">
-              <FaInstagram size={20} />
-            </a>
-          </div>
         </div>
       </div>
 

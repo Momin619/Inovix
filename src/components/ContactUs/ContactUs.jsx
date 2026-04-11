@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../../components/ui/Navbar";
 import Footer from "../../components/ui/Footer";
 import { Twitter, Github, Linkedin } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
 // Black-themed Contact Us component styled with Tailwind CSS
 // Default export so you can drop this into any React app
 import api from "../../api/axios";
@@ -34,24 +36,45 @@ export default function ContactUs() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const v = validate();
     setErrors(v);
-    if (Object.keys(v).length === 0) {
-      setSubmitted(true);
 
-      // Call backend API
-      api
-        .post("/api/contact-us", form)
-        .then((res) => {
-          alert("✅ Thanks! Your message has been sent.");
-          setForm({ name: "", email: "", phone: "", message: "" });
-        })
-        .catch((err) => {
-          console.error("❌ API error:", err);
-          alert("Something went wrong. Please try again.");
-        })
-        .finally(() => setSubmitted(false));
-    }
+    if (Object.keys(v).length !== 0) return;
+
+    setSubmitted(true);
+
+    const templateParams = {
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      message: form.message,
+    };
+
+    emailjs
+      .send(
+        "service_bykerzv",
+        "template_l5xteeh",
+        templateParams,
+        "TwY1F-BXiVhUepNj0",
+      )
+      .then(() => {
+        alert("✅ Thanks! Your message has been sent.");
+
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      })
+      .catch((error) => {
+        console.error("EmailJS error:", error);
+        alert("❌ Failed to send message. Try again.");
+      })
+      .finally(() => {
+        setSubmitted(false);
+      });
   }
 
   return (
