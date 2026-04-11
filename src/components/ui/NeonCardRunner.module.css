@@ -1,52 +1,85 @@
 :root {
-  --runner-len: 60; /* glowing dash length */
-  --runner-thick: 2.5; /* neon thickness */
   --neon: #00fff7;
-  --speed: 60s; /* smaller = faster */
-  --offset: 2px;
 }
 
+/* MAIN WRAPPER */
 .cardWrapper {
   position: relative;
   width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.runnerWrapper {
+/* ========================= */
+/*  TWO MOVING NEON LINES   */
+/* ========================= */
+
+.border {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  border-radius: 1rem;
-  z-index: 1;
-}
-
-.runner {
-  position: absolute;
-  top: calc(-1 * var(--offset));
-  left: calc(-1 * var(--offset));
-  width: calc(100% + (var(--offset) * 2));
-  height: calc(100% + (var(--offset) * 2));
+  border-radius: 16px;
   pointer-events: none;
-  filter: drop-shadow(0 0 8px var(--neon)) drop-shadow(0 0 16px var(--neon))
-    drop-shadow(0 0 32px var(--neon)) drop-shadow(0 0 48px var(--neon));
 }
 
-.runner svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+/* top-left moving line */
+.border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+
+  height: 2px;
+  width: 200%;
+  top: 0;
+  left: -100%;
+
+  animation: moveX 3s linear infinite;
+  filter: drop-shadow(0 0 6px var(--neon));
 }
 
-.borderPath {
-  fill: none;
-  stroke: var(--neon);
-  stroke-width: var(--runner-thick);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  animation: dash var(--speed) linear infinite;
+/* bottom-right moving line */
+.border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+
+  height: 2px;
+  width: 200%;
+  bottom: 0;
+  right: -100%;
+
+  animation: moveXReverse 3s linear infinite;
+  filter: drop-shadow(0 0 6px var(--neon));
 }
 
-@keyframes dash {
-  to {
-    stroke-dashoffset: -1000; /* always negative so it flows forward */
+@keyframes moveX {
+  0% {
+    transform: translateX(0);
   }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+@keyframes moveXReverse {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* CONTENT */
+.content {
+  position: relative;
+  z-index: 2;
+  background: rgba(24, 24, 27, 0.92);
+  border-radius: 16px;
+  padding: 1.5rem;
 }

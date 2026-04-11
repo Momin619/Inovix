@@ -1,6 +1,7 @@
 // Footer.jsx
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 const quickLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
@@ -8,19 +9,10 @@ const quickLinks = [
   { name: "Contact", path: "/contact" },
 ];
 
-// Services
-const services = [
-  { name: "Web Development", path: "/services/web-development" },
-  { name: "UI/UX Design", path: "/services/ui-ux" },
-  { name: "E-commerce", path: "/services/ecommerce" },
-  { name: "Consulting", path: "/services/consulting" },
-];
 export default function Footer() {
-  // Quick Links
-
   return (
     <footer className="bg-gray-900 text-gray-300 pt-12 pb-6 relative z-30">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         {/* Company Info */}
         <div>
           <h2 className="text-white text-2xl font-bold mb-4">Inovix</h2>
@@ -39,23 +31,6 @@ export default function Footer() {
               <li key={idx}>
                 <Link to={link.path} className="hover:text-cyan-400 transition">
                   {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Services */}
-        <div>
-          <h3 className="text-white text-lg font-semibold mb-4">Services</h3>
-          <ul className="space-y-2">
-            {services.map((service, idx) => (
-              <li key={idx}>
-                <Link
-                  to={service.path}
-                  className="hover:text-cyan-400 transition"
-                >
-                  {service.name}
                 </Link>
               </li>
             ))}
@@ -86,6 +61,7 @@ export default function Footer() {
             </li>
             <li>Location: Bahria Town, Rawalpindi</li>
           </ul>
+
           <div className="flex space-x-4 mt-4">
             <a href="#" className="hover:text-cyan-400 transition">
               <FaFacebook size={20} />
