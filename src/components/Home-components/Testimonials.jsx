@@ -7,28 +7,31 @@ const testimonials = [
     name: "Alice Johnson",
     review:
       "This platform completely transformed our workflow. The intuitive design and smooth experience made everything effortless.",
-    avatar: "https://i.pravatar.cc/100?img=47",
+    avatar: "/testimonials-images/1.jpg",
     rating: 5,
   },
   {
     name: "Michael Smith",
     review:
       "I was impressed by the speed and reliability. Customer support was responsive and went above expectations.",
-    avatar: "https://i.pravatar.cc/100?img=7",
+    avatar: "/testimonials-images/2.jpg",
+
     rating: 4,
   },
   {
     name: "Sophie Lee",
     review:
       "The attention to detail in the interface and the unique features set this apart from anything I’ve used before.",
-    avatar: "https://i.pravatar.cc/100?img=32",
+    avatar: "/testimonials-images/3.jpg",
+
     rating: 5,
   },
   {
     name: "David Brown",
     review:
       "I highly recommend this service to anyone looking for a robust solution that actually delivers.",
-    avatar: "https://i.pravatar.cc/100?img=1",
+    avatar: "/testimonials-images/4.jpg",
+
     rating: 4,
   },
 ];
@@ -38,21 +41,17 @@ const Testimonials = () => {
   const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    let timeoutId;
-
-    const cycleReviews = () => {
+    // ✅ Use an interval — much simpler, single cleanup, no nesting
+    const interval = setInterval(() => {
       setFade(false);
-      timeoutId = setTimeout(() => {
+      setTimeout(() => {
         setReviewIndex((prev) => (prev + 1) % testimonials.length);
         setFade(true);
-        timeoutId = setTimeout(cycleReviews, 3100); // auto cycle every 3s
       }, 300);
-    };
+    }, 3400); // 300ms fade-out + 3100ms display = 3400ms total
 
-    cycleReviews();
-    return () => clearTimeout(timeoutId);
+    return () => clearInterval(interval); // ✅ single, correct cleanup
   }, []);
-
   return (
     <section className="relative z-30 py-[clamp(1.5rem,5vw,3.5rem)] bg-black text-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">

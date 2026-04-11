@@ -1,23 +1,22 @@
-import { FaRocket, FaShieldAlt, FaUsers, FaCogs } from "react-icons/fa";
-
+import { Rocket, Shield, Users, Settings } from "lucide-react";
 const features = [
   {
-    icon: <FaRocket className="text-cyan-400 text-4xl mb-3" />,
+    icon: <Rocket className="text-cyan-400 text-4xl mb-3" />,
     title: "Fast Performance",
     desc: "Optimized for speed and efficiency to deliver a seamless experience.",
   },
   {
-    icon: <FaShieldAlt className="text-purple-400 text-4xl mb-3" />,
+    icon: <Shield className="text-purple-400 text-4xl mb-3" />,
     title: "Secure by Design",
     desc: "Advanced security practices ensure your data and workflows are protected.",
   },
   {
-    icon: <FaUsers className="text-pink-400 text-4xl mb-3" />,
+    icon: <Users className="text-pink-400 text-4xl mb-3" />,
     title: "User Friendly",
     desc: "Built with simplicity and usability in mind for all types of users.",
   },
   {
-    icon: <FaCogs className="text-green-400 text-4xl mb-3" />,
+    icon: <Settings className="text-green-400 text-4xl mb-3" />,
     title: "Customizable",
     desc: "Flexible features that can be tailored to your specific needs.",
   },

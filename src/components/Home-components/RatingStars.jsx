@@ -1,24 +1,15 @@
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-
-function RatingStars({ rating }) {
-  // Round to nearest 0.5
-  const roundedRating = Math.round(rating * 2) / 2;
-
-  const fullStars = Math.floor(roundedRating);
-  const hasHalfStar = roundedRating % 1 === 0.5;
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
+// ✅ Replace RatingStars entirely — no react-icons needed
+export default function RatingStars({ rating }) {
   return (
-    <div className="flex gap-1 text-yellow-500">
-      {[...Array(fullStars)].map((_, i) => (
-        <FaStar key={`full-${i}`} />
-      ))}
-      {hasHalfStar && <FaStarHalfAlt key="half" />}
-      {[...Array(emptyStars)].map((_, i) => (
-        <FaRegStar key={`empty-${i}`} />
+    <div
+      className="flex gap-0.5 text-yellow-400 text-base"
+      aria-label={`${rating} out of 5 stars`}
+    >
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span key={i}>
+          {i <= Math.floor(rating) ? "★" : i - rating < 1 ? "½" : "☆"}
+        </span>
       ))}
     </div>
   );
 }
-
-export default RatingStars;

@@ -1,23 +1,22 @@
 // Footer.jsx
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
+const quickLinks = [
+  { name: "Home", path: "/" },
+  { name: "About Us", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Contact", path: "/contact" },
+];
 
+// Services
+const services = [
+  { name: "Web Development", path: "/services/web-development" },
+  { name: "UI/UX Design", path: "/services/ui-ux" },
+  { name: "E-commerce", path: "/services/ecommerce" },
+  { name: "Consulting", path: "/services/consulting" },
+];
 export default function Footer() {
   // Quick Links
-  const quickLinks = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Contact", path: "/contact" },
-  ];
-
-  // Services
-  const services = [
-    { name: "Web Development", path: "/services/web-development" },
-    { name: "UI/UX Design", path: "/services/ui-ux" },
-    { name: "E-commerce", path: "/services/ecommerce" },
-    { name: "Consulting", path: "/services/consulting" },
-  ];
 
   return (
     <footer className="bg-gray-900 text-gray-300 pt-12 pb-6 relative z-30">

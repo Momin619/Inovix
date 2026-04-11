@@ -1,9 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
+import { visualizer } from "rollup-plugin-visualizer";
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    visualizer({ open: true, gzipSize: true, filename: "bundle-stats.html" }),
+  ],
   server: {
     host: true, // allows access from LAN / all IPs
     port: 5173,

@@ -13,46 +13,46 @@ import { useEffect, useRef } from "react";
 import NeonCardRunner from "./ui/NeonCardRunner";
 import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
-export default function WorkFlow() {
-  const steps = [
-    {
-      numIcon: <Fa1 className="text-black text-lg" />,
-      icon: <PenTool className="w-10 h-10 text-cyan-400" />,
-      title: "Research & Planning",
-      desc: "We start with brainstorming, requirement gathering, and market research to define a strong foundation for your product.",
-    },
-    {
-      numIcon: <Fa2 className="text-black text-lg" />,
-      icon: <Workflow className="w-10 h-10 text-purple-400" />,
-      title: "UI/UX Design",
-      desc: "Our creative team designs user-friendly interfaces with stunning visuals, focusing on aesthetics and seamless usability.",
-    },
-    {
-      numIcon: <Fa3 className="text-black text-lg" />,
-      icon: <Code2 className="w-10 h-10 text-green-400" />,
-      title: "Development",
-      desc: "We bring your idea to life with clean code, modern frameworks, and scalable architecture for web, mobile, or desktop apps.",
-    },
-    {
-      numIcon: <Fa4 className="text-black text-lg" />,
-      icon: <Users className="w-10 h-10 text-yellow-400" />,
-      title: "Testing & QA",
-      desc: "Our QA engineers ensure your project is bug-free, responsive, and works flawlessly across all platforms and devices.",
-    },
-    {
-      numIcon: <Fa5 className="text-black text-lg" />,
-      icon: <MonitorSmartphone className="w-10 h-10 text-pink-400" />,
-      title: "Deployment",
-      desc: "We deploy your app on secure servers or app stores, ensuring smooth launch and zero downtime.",
-    },
-    {
-      numIcon: <Fa6 className="text-black text-lg" />,
-      icon: <Rocket className="w-10 h-10 text-red-400" />,
-      title: "Growth & Support",
-      desc: "Post-launch, we provide updates, monitoring, and support to ensure long-term success and growth.",
-    },
-  ];
+const steps = [
+  {
+    numIcon: <Fa1 className="text-black text-lg" />,
+    icon: <PenTool className="w-10 h-10 text-cyan-400" />,
+    title: "Research & Planning",
+    desc: "We start with brainstorming, requirement gathering, and market research to define a strong foundation for your product.",
+  },
+  {
+    numIcon: <Fa2 className="text-black text-lg" />,
+    icon: <Workflow className="w-10 h-10 text-purple-400" />,
+    title: "UI/UX Design",
+    desc: "Our creative team designs user-friendly interfaces with stunning visuals, focusing on aesthetics and seamless usability.",
+  },
+  {
+    numIcon: <Fa3 className="text-black text-lg" />,
+    icon: <Code2 className="w-10 h-10 text-green-400" />,
+    title: "Development",
+    desc: "We bring your idea to life with clean code, modern frameworks, and scalable architecture for web, mobile, or desktop apps.",
+  },
+  {
+    numIcon: <Fa4 className="text-black text-lg" />,
+    icon: <Users className="w-10 h-10 text-yellow-400" />,
+    title: "Testing & QA",
+    desc: "Our QA engineers ensure your project is bug-free, responsive, and works flawlessly across all platforms and devices.",
+  },
+  {
+    numIcon: <Fa5 className="text-black text-lg" />,
+    icon: <MonitorSmartphone className="w-10 h-10 text-pink-400" />,
+    title: "Deployment",
+    desc: "We deploy your app on secure servers or app stores, ensuring smooth launch and zero downtime.",
+  },
+  {
+    numIcon: <Fa6 className="text-black text-lg" />,
+    icon: <Rocket className="w-10 h-10 text-red-400" />,
+    title: "Growth & Support",
+    desc: "Post-launch, we provide updates, monitoring, and support to ensure long-term success and growth.",
+  },
+];
 
+export default function WorkFlow() {
   const dashRefs = useRef([]);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function WorkFlow() {
         <section className="relative px-4 sm:px-6 py-20 flex flex-col items-center gap-12">
           {steps.map((step, index) => (
             <div
-              key={index}
+              key={step.title}
               className="relative w-[90%] sm:w-4/5 flex flex-col items-center"
             >
               {/* Card + Neon Runner Wrapper */}

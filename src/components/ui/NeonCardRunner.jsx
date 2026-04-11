@@ -8,6 +8,7 @@ export default function NeonRunnerCard({ children }) {
     const path = pathRef.current;
     if (!path) return;
 
+    // ✅ Set it once, on the path's own style only
     function updateDash() {
       const L = path.getTotalLength();
       const stripLen =
@@ -16,16 +17,11 @@ export default function NeonRunnerCard({ children }) {
             "--runner-len",
           ),
         ) || 50;
-
-      // Instead of 1 strip, repeat it several times
       const gap = stripLen * 2;
-      const dashPattern = `${stripLen} ${gap}`;
-
-      path.style.strokeDasharray = dashPattern;
+      path.style.strokeDasharray = `${stripLen} ${gap}`;
       path.style.strokeDashoffset = "0";
-
-      // ensure smooth loop
-      document.documentElement.style.setProperty("--perimeter", L);
+      // ✅ Remove the documentElement.style.setProperty("--perimeter", L) line
+      //    It's not used by the CSS animation anyway — the animation uses --speed
     }
 
     updateDash();

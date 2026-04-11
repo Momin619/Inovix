@@ -308,7 +308,7 @@ export default function Project() {
       <div className="grid my-20 gap-8 sm:gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {categories.map((cat, i) => (
           <motion.div
-            key={i}
+            key={cat.title}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3 }}
             className={`flex flex-col h-full rounded-2xl p-6 sm:p-8 shadow-lg bg-gradient-to-b ${cat.gradient} border border-gray-800 hover:border-cyan-400 hover:shadow-cyan-500/20 transition`}
@@ -330,7 +330,7 @@ export default function Project() {
             <div className="grid gap-5">
               {cat.projects.map((p, j) => (
                 <motion.div
-                  key={j}
+                  key={p.name}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                   className="relative group rounded-xl overflow-hidden shadow-md"

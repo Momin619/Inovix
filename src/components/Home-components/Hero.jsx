@@ -5,9 +5,6 @@ const ParticlesBackground = lazy(() => import("../ui/ParticlesBackground"));
 
 const Hero = () => {
   const navigate = useNavigate();
-  const handleLearnBtn = () => {
-    navigate("/workflow");
-  };
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
       {/* Particle Background */}
@@ -61,7 +58,7 @@ const Hero = () => {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <button
             className="cursor-pointer w-36 sm:w-44 md:w-52 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-semibold text-cyan-400 rounded-full border border-cyan-400 hover:bg-cyan-400 hover:text-black transition duration-400 ease-in-out"
-            onClick={() => handleLearnBtn()}
+            onClick={() => navigate("/workflow")}
           >
             Learn More
           </button>

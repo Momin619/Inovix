@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 const navLinks = [
   { name: "Home", path: "/" },
@@ -41,7 +41,7 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white text-3xl focus:outline-none"
         >
-          {isOpen ? <FiX /> : <FiMenu />}
+          {isOpen ? <X /> : <Menu />}
         </button>
       </div>
 
