@@ -1,6 +1,7 @@
 import "./styles/output.css";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -28,8 +29,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<PageLoader />}>
-        {" "}
-        {/* ✅ Required for lazy routes */}
+        <Toaster position="top-right" /> {/* ✅ Required for lazy routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

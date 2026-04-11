@@ -3,10 +3,15 @@ import Navbar from "../../components/ui/Navbar";
 import Footer from "../../components/ui/Footer";
 import { Twitter, Github, Linkedin } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
 // Black-themed Contact Us component styled with Tailwind CSS
 // Default export so you can drop this into any React app
-import api from "../../api/axios";
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+console.log(serviceId, publicKey, templateId);
+
 export default function ContactUs() {
   const [form, setForm] = useState({
     name: "",
@@ -52,14 +57,9 @@ export default function ContactUs() {
     };
 
     emailjs
-      .send(
-        "service_bykerzv",
-        "template_l5xteeh",
-        templateParams,
-        "TwY1F-BXiVhUepNj0",
-      )
+      .send(serviceId, templateId, templateParams, publicKey)
       .then(() => {
-        alert("✅ Thanks! Your message has been sent.");
+        toast.success("Message sent successfully");
 
         setForm({
           name: "",
@@ -70,7 +70,7 @@ export default function ContactUs() {
       })
       .catch((error) => {
         console.error("EmailJS error:", error);
-        alert("❌ Failed to send message. Try again.");
+        toast.error("Failed to send message. Try again.");
       })
       .finally(() => {
         setSubmitted(false);
