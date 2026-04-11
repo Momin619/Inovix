@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Projects", path: "/projects" },
+  { name: "Contact Us", path: "/contact" },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Projects", path: "/projects" },
-    { name: "Contact Us", path: "/contact" },
-  ];
 
   return (
     <nav className="fixed  top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-md border-b border-white/10 shadow-lg">

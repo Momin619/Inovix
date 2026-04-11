@@ -50,14 +50,14 @@ export default function AboutUs() {
   const team = [
     {
       id: 1,
-      img: "https://i.pravatar.cc/100?img=11",
+      img: "/about-us-images/1.jpg",
       name: "Alex Johnson",
       role: "Frontend Developer",
       description: "Specializes in building modern, responsive UIs with React.",
     },
     {
       id: 2,
-      img: "https://i.pravatar.cc/100?img=5",
+      img: "/about-us-images/2.jpg",
       name: "Sara Ahmed",
       role: "Backend Engineer",
       description:
@@ -65,7 +65,7 @@ export default function AboutUs() {
     },
     {
       id: 3,
-      img: "https://i.pravatar.cc/100?img=20",
+      img: "/about-us-images/3.jpg",
       name: "Mike Smith",
       role: "UI/UX Designer",
       description: "Passionate about creating delightful user experiences.",

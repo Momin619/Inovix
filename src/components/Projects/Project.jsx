@@ -339,7 +339,9 @@ export default function Project() {
                     src={p.img}
                     alt={p.name}
                     loading="lazy"
-                    className="w-full h-44 sm:h-48 object-cover transform group-hover:scale-110 transition duration-500"
+                    width={400}
+                    height={176}
+                    className="w-full h-44 object-cover"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center text-center p-4">
                     <h3 className="text-lg sm:text-xl font-semibold text-cyan-300">

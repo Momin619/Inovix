@@ -5,7 +5,7 @@ import TrustedBy from "../components/Home-components/TrustedBy-components/Truste
 import Features from "../components/Home-components/Features";
 import Testimonials from "../components/Home-components/Testimonials";
 import Footer from "../components/ui/Footer";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 export default function Home() {
   return (
     <>

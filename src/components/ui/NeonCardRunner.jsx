@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useRef } from "react";
 import styles from "./NeonCardRunner.module.css";
 
@@ -14,8 +13,8 @@ export default function NeonRunnerCard({ children }) {
       const stripLen =
         parseFloat(
           getComputedStyle(document.documentElement).getPropertyValue(
-            "--runner-len"
-          )
+            "--runner-len",
+          ),
         ) || 50;
 
       // Instead of 1 strip, repeat it several times

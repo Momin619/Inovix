@@ -1,7 +1,7 @@
 import React from "react";
 
 import ContactUs from "../components/ContactUs/ContactUs";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 export default function Contact() {
   return (
     <>

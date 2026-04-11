@@ -5,7 +5,7 @@ import { loadSlim } from "@tsparticles/slim";
 
 export default function ParticlesBackground() {
   const [init, setInit] = useState(false);
-
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine); // load slim bundle (shapes, presets, etc.)
@@ -25,7 +25,10 @@ export default function ParticlesBackground() {
           color: { value: "#000000" },
         },
         particles: {
-          number: { value: 150, density: { enable: true, area: 800 } },
+          number: {
+            value: isMobile ? 0 : 60,
+            density: { enable: true, area: 800 },
+          },
           color: { value: "#00ffff" },
           shape: { type: "triangle" },
           opacity: { value: 0.5 },

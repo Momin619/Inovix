@@ -1,12 +1,15 @@
 import React from "react";
 import "./styles/output.css";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Services from "./pages/Services";
-import Projects from "./pages/Projects";
-import WorkFlow from "./components/WorkFlow";
-import NotFound from "./components/404-error_component/404-error";
+import { lazy, Suspense } from "react";
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Services = lazy(() => import("./pages/Services"));
+const Projects = lazy(() => import("./pages/Projects"));
+const WorkFlow = lazy(() => import("./components/WorkFlow"));
+const NotFound = lazy(
+  () => import("./components/404-error_component/404-error"),
+);
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 export default function App() {
   return (

@@ -56,9 +56,10 @@ export default function WorkFlow() {
   const dashRefs = useRef([]);
 
   useEffect(() => {
+    const handlers = [];
+
     dashRefs.current.forEach((path) => {
       if (!path) return;
-
       const updateDash = () => {
         const L = path.getTotalLength();
         const stripLen = 15;
@@ -67,12 +68,14 @@ export default function WorkFlow() {
         path.style.strokeDashoffset = "0";
         document.documentElement.style.setProperty("--perimeter", L);
       };
-
       updateDash();
       window.addEventListener("resize", updateDash);
+      handlers.push(updateDash); // ✅ store reference
     });
 
-    return () => window.removeEventListener("resize", () => {});
+    return () => {
+      handlers.forEach((fn) => window.removeEventListener("resize", fn)); // ✅ remove correct reference
+    };
   }, []);
 
   return (
