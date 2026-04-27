@@ -48,21 +48,21 @@ const counters = [
 const team = [
   {
     id: 1,
-    img: "/about-us-images/1.jpg",
+    img: "/images/about-us-images/1.jpg",
     name: "Alex Johnson",
     role: "Frontend Developer",
     description: "Specializes in building modern, responsive UIs with React.",
   },
   {
     id: 2,
-    img: "/about-us-images/2.jpg",
+    img: "/images/about-us-images/2.jpg",
     name: "Sara Ahmed",
     role: "Backend Engineer",
     description: "Loves working with Node.js & Express to craft scalable APIs.",
   },
   {
     id: 3,
-    img: "/about-us-images/3.jpg",
+    img: "/images/about-us-images/3.jpg",
     name: "Mike Smith",
     role: "UI/UX Designer",
     description: "Passionate about creating delightful user experiences.",
