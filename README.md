@@ -67,11 +67,11 @@ Open `http://localhost:5173`
 
 ```
 src/
-├── api/            # Axios instance
 ├── components/     # All UI components (Navbar, Footer, sections)
 ├── pages/          # Home, About, Services, Projects, Contact
 └── styles/         # Tailwind CSS files
 public/
 ├── 3d-model/       # Globe .glb file
 └── images/         # Project images
+├── titlebar-icon/  # favicon.ico
 ```
