@@ -1,12 +1,77 @@
-# React + Vite
+# Inovix — Software Company Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive multi-page website for a fictional software company. Built with React and Vite as a frontend practice project.
 
-Currently, two official plugins are available:
+> ⚠️ Inovix is a fake company created for learning purposes only.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Animated hero with interactive particle background
+- 3D rotating globe (Three.js)
+- Services section with tilt card hover effect
+- Projects portfolio with 12 categories
+- Company workflow, about, and team pages
+- Working contact form via EmailJS
+- Smooth animations with Framer Motion
+- Fully responsive design
+
+---
+
+## Technologies Used
+
+| Tool | Purpose |
+|---|---|
+| React 19 + Vite | Frontend framework and build tool |
+| Tailwind CSS | Styling and responsive design |
+| React Router DOM | Client-side routing |
+| Framer Motion | Page and component animations |
+| Three.js + @react-three/fiber | 3D rotating globe |
+| EmailJS | Sending emails from the contact form |
+| React Hot Toast | Success and error notifications |
+
+---
+
+## Getting Started
+
+**1. Clone & install**
+
+```bash
+git clone https://github.com/momin619/inovix.git
+cd inovix
+npm install
+```
+
+**2. Add environment variables**
+
+Create a `.env` file in the root:
+
+```env
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+**3. Run**
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:5173`
+
+---
+
+## Folder Structure
+
+```
+src/
+├── api/            # Axios instance
+├── components/     # All UI components (Navbar, Footer, sections)
+├── pages/          # Home, About, Services, Projects, Contact
+└── styles/         # Tailwind CSS files
+public/
+├── 3d-model/       # Globe .glb file
+└── images/         # Project images
+```
