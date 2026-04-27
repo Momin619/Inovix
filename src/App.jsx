@@ -8,7 +8,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Services = lazy(() => import("./pages/Services"));
 const Projects = lazy(() => import("./pages/Projects"));
-const WorkFlow = lazy(() => import("./pages/WorkFlow"));
+const WorkFlow = lazy(() => import("./pages/Workflow"));
 const NotFound = lazy(
   () => import("./components/404-error_component/404-error"),
 );
