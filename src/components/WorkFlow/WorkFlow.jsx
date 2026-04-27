@@ -8,10 +8,9 @@ import {
   Users,
 } from "lucide-react";
 import { HiMiniArrowLongDown } from "react-icons/hi2";
-import { useEffect, useRef } from "react";
 
-import Footer from "./ui/Footer";
-import Navbar from "./ui/Navbar";
+import Footer from "../ui/Footer";
+import Navbar from "../ui/Navbar";
 
 export default function WorkFlow() {
   const steps = [
