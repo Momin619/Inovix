@@ -1,7 +1,7 @@
 import AboutHero from "./AboutHero";
 import MissionVision from "./MissionVision";
 import CoreValues from "./CoreValues";
-import Timeline from "./Timeline";
+import TimeLine from "./TimeLine";
 import Milestones from "./Milestones";
 import TeamSection from "./TeamSection";
 
@@ -28,7 +28,7 @@ export default function AboutUs() {
         <AboutHero />
         <MissionVision />
         <CoreValues />
-        <Timeline />
+        <TimeLine />
         <Milestones />
         <TeamSection />
       </div>
