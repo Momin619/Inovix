@@ -1,312 +1,328 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../../components/ui/Navbar";
 import Footer from "../../components/ui/Footer";
-import { Twitter, Github, Linkedin } from "lucide-react";
+import { Twitter, Github, Linkedin, Send, Sparkles } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
-// Black-themed Contact Us component styled with Tailwind CSS
-// Default export so you can drop this into any React app
 const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-console.log(serviceId, publicKey, templateId);
 
 export default function ContactUs() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  function validate() {
-    const e = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.email.trim()) e.email = "Email is required";
-    else if (!/^\S+@\S+\.\S+$/.test(form.email))
-      e.email = "Enter a valid email";
-    if (!form.message.trim()) e.message = "Message is required";
-    // phone is optional but if provided must be digits
-    if (form.phone && !/^\+?[0-9\-\s()]{6,}$/.test(form.phone))
-      e.phone = "Enter a valid phone";
-    return e;
-  }
-
-  function handleChange(e) {
-    setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const v = validate();
-    setErrors(v);
-
-    if (Object.keys(v).length !== 0) return;
-
-    setSubmitted(true);
-
+  async function onSubmit(data) {
     const templateParams = {
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      message: form.message,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      message: data.message,
     };
 
-    emailjs
-      .send(serviceId, templateId, templateParams, publicKey)
-      .then(() => {
-        toast.success("Message sent successfully");
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-        setForm({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-        });
-      })
-      .catch((error) => {
-        console.error("EmailJS error:", error);
-        toast.error("Failed to send message. Try again.");
-      })
-      .finally(() => {
-        setSubmitted(false);
-      });
+      toast.success("Message sent successfully");
+
+      reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast.error("Failed to send message. Try again.");
+    }
   }
 
   return (
     <>
-      {/* Contact Section */}
-      <Navbar />
-      <section className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-gray-100 py-16 px-6 pt-32">
-        <div className="mx-auto max-w-7xl flex flex-col lg:flex-row gap-16 items-start">
-          {/* Left: Info */}
-          <div className="flex-1 space-y-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-snug tracking-tight">
-              Let’s build something{" "}
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300">
-                great together
-              </span>
-            </h1>
+      <section className="relative min-h-screen overflow-hidden bg-black text-white pt-32 pb-20">
+        {/* Background Effects */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-indigo-600/10 blur-[140px]" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[140px]" />
+        </div>
 
-            {/* Info cards */}
-            <div className="flex flex-wrap gap-4">
-              <div className="flex-1 min-w-[240px] p-4 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-sm">
-                <h3 className="text-sm text-gray-300/90 font-semibold">
-                  Office
-                </h3>
-                <p className="mt-2 text-sm text-gray-400">
-                  Silk Bank Rd, Bahria Town Phase 8, Lahore, Pakistan
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+            {/* Left Content */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl">
+                <Sparkles className="w-4 h-4 text-indigo-400" />
+                <span className="text-sm text-gray-300">Contact our team</span>
+              </div>
+
+              <div className="space-y-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.05] tracking-tight">
+                  Let’s create
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+                    something exceptional
+                  </span>
+                </h1>
+
+                <p className="max-w-xl text-base sm:text-lg text-gray-400 leading-relaxed">
+                  Whether you're launching a startup, scaling a product, or
+                  building a premium digital experience — we’re ready to help
+                  turn your vision into reality.
                 </p>
               </div>
 
-              <div className="flex-1 min-w-[240px] p-4 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-sm">
-                <h3 className="text-sm text-gray-300/90 font-semibold">
-                  Working Hours
-                </h3>
-                <p className="mt-2 text-sm text-gray-400">
-                  Mon — Fri: 9:00 AM — 6:00 PM (PKT)
-                </p>
+              {/* Socials */}
+              <div className="flex items-center gap-4 pt-2">
+                {[
+                  { icon: Twitter, label: "Twitter" },
+                  { icon: Github, label: "Github" },
+                  { icon: Linkedin, label: "LinkedIn" },
+                ].map((item, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    aria-label={item.label}
+                    className="group w-12 h-12 rounded-2xl border border-white/10 bg-white/[0.03]
+                    flex items-center justify-center backdrop-blur-xl
+                    hover:border-indigo-500/40 hover:bg-indigo-500/10
+                    transition-all duration-300"
+                  >
+                    <item.icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                  </a>
+                ))}
               </div>
 
-              <div className="flex-1 min-w-[240px] p-4 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-sm">
-                <h3 className="text-sm text-gray-300/90 font-semibold">
-                  Email
-                </h3>
-                <p className="mt-2 text-sm text-gray-400">inovix4@gmail.com</p>
-              </div>
+              {/* Premium Card */}
+              <div
+                className="relative overflow-hidden rounded-3xl border border-white/10
+                bg-gradient-to-br from-white/[0.07] to-white/[0.02]
+                backdrop-blur-2xl p-8"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5" />
 
-              <div className="flex-1 min-w-[240px] p-4 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-sm">
-                <h3 className="text-sm text-gray-300/90 font-semibold">
-                  Phone
-                </h3>
-                <p className="mt-2 text-sm text-gray-400">+92 300 0000000</p>
+                <div className="relative z-10">
+                  <p className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-3">
+                    Why work with us
+                  </p>
+
+                  <h3 className="text-2xl font-bold mb-4">
+                    Clean systems. Premium experiences.
+                  </h3>
+
+                  <p className="text-gray-400 leading-relaxed">
+                    We focus on performance, scalability, modern UI/UX, and
+                    high-quality engineering to craft digital products that feel
+                    polished across every device.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Socials */}
-            <div className="flex items-center gap-3">
-              <a
-                href="#"
-                aria-label="twitter"
-                className="p-2 rounded-lg bg-gray-900/60 border border-gray-800 hover:scale-105 transition-transform"
-              >
-                <Twitter />
-              </a>
-              <a
-                href="#"
-                aria-label="github"
-                className="p-2 rounded-lg bg-gray-900/60 border border-gray-800 hover:scale-105 transition-transform"
-              >
-                <Github />
-              </a>
-              <a
-                href="#"
-                aria-label="linkedin"
-                className="p-2 rounded-lg bg-gray-900/60 border border-gray-800 hover:scale-105 transition-transform"
-              >
-                <Linkedin />
-              </a>
+            {/* Right Form */}
+            <div
+              className="relative rounded-[32px] border border-white/10
+              bg-white/[0.04] backdrop-blur-2xl p-6 sm:p-8 lg:p-10 overflow-hidden"
+            >
+              {/* Glow */}
+              <div className="absolute top-0 right-0 w-60 h-60 bg-indigo-500/10 blur-[100px]" />
+
+              <div className="relative z-10">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold mb-3">Send a message</h2>
+
+                  <p className="text-gray-400">
+                    Fill out the form below and we’ll get back to you soon.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                  {/* Name */}
+                  <div>
+                    <label className="text-sm text-gray-300 mb-2 block">
+                      Full Name
+                    </label>
+
+                    <input
+                      type="text"
+                      placeholder="John Doe"
+                      {...register("name", {
+                        required: "Name is required",
+                        minLength: {
+                          value: 3,
+                          message: "Minimum 3 characters required",
+                        },
+                      })}
+                      className={`w-full px-4 py-4 rounded-2xl border bg-black/40 outline-none transition-all
+                      ${
+                        errors.name
+                          ? "border-red-500 focus:ring-2 focus:ring-red-500/30"
+                          : "border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                      }`}
+                    />
+
+                    {errors.name && (
+                      <p className="text-red-400 text-sm mt-2">
+                        {errors.name.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label className="text-sm text-gray-300 mb-2 block">
+                      Email Address
+                    </label>
+
+                    <input
+                      type="email"
+                      placeholder="name@example.com"
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^\S+@\S+\.\S+$/,
+                          message: "Enter a valid email address",
+                        },
+                      })}
+                      className={`w-full px-4 py-4 rounded-2xl border bg-black/40 outline-none transition-all
+                      ${
+                        errors.email
+                          ? "border-red-500 focus:ring-2 focus:ring-red-500/30"
+                          : "border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                      }`}
+                    />
+
+                    {errors.email && (
+                      <p className="text-red-400 text-sm mt-2">
+                        {errors.email.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  <div>
+                    <label className="text-sm text-gray-300 mb-2 block">
+                      Phone Number
+                    </label>
+
+                    <input
+                      type="text"
+                      placeholder="+92 300 0000000"
+                      {...register("phone", {
+                        pattern: {
+                          value: /^\+?[0-9\-\s()]{6,}$/,
+                          message: "Enter a valid phone number",
+                        },
+                      })}
+                      className={`w-full px-4 py-4 rounded-2xl border bg-black/40 outline-none transition-all
+                      ${
+                        errors.phone
+                          ? "border-red-500 focus:ring-2 focus:ring-red-500/30"
+                          : "border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                      }`}
+                    />
+
+                    {errors.phone && (
+                      <p className="text-red-400 text-sm mt-2">
+                        {errors.phone.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label className="text-sm text-gray-300 mb-2 block">
+                      Project Details
+                    </label>
+
+                    <textarea
+                      rows={6}
+                      placeholder="Tell us about your project..."
+                      {...register("message", {
+                        required: "Message is required",
+                        minLength: {
+                          value: 15,
+                          message: "Message must be at least 15 characters",
+                        },
+                      })}
+                      className={`w-full px-4 py-4 rounded-2xl border bg-black/40 outline-none resize-none transition-all
+                      ${
+                        errors.message
+                          ? "border-red-500 focus:ring-2 focus:ring-red-500/30"
+                          : "border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                      }`}
+                    />
+
+                    {errors.message && (
+                      <p className="text-red-400 text-sm mt-2">
+                        {errors.message.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group relative w-full overflow-hidden rounded-2xl
+                    bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
+                    px-6 py-4 font-semibold text-white shadow-2xl
+                    hover:scale-[1.01] transition-all duration-300
+                    disabled:opacity-60"
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {isSubmitting ? (
+                        <>
+                          <svg
+                            className="animate-spin h-5 w-5"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="white"
+                              strokeWidth="4"
+                              fill="none"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="white"
+                              d="M4 12a8 8 0 018-8v8z"
+                            />
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          Send Message
+                        </>
+                      )}
+                    </span>
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
 
-          {/* Right: Form + map */}
-          <div className="flex-1 space-y-8 w-full">
-            {/* Contact Form */}
-            <div className="p-6 rounded-3xl bg-gradient-to-br from-gray-900/60 to-black/40 border border-gray-800 shadow-xl">
-              <form onSubmit={handleSubmit} className="grid gap-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  {/* Name */}
-                  <label className="flex-1 flex flex-col">
-                    <span className="text-xs text-gray-300 mb-2">Name</span>
-                    <input
-                      name="name"
-                      value={form.name}
-                      onChange={handleChange}
-                      placeholder="Your full name"
-                      className="px-4 py-3 rounded-lg bg-gray-900/70 border border-gray-800 focus:ring-2 focus:ring-indigo-500 outline-none"
-                    />
-                    {errors.name && (
-                      <span className="text-rose-400 text-xs mt-1">
-                        {errors.name}
-                      </span>
-                    )}
-                  </label>
-
-                  {/* Email */}
-                  <label className="flex-1 flex flex-col">
-                    <span className="text-xs text-gray-300 mb-2">Email</span>
-                    <input
-                      name="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="name@company.com"
-                      className="px-4 py-3 rounded-lg bg-gray-900/70 border border-gray-800 focus:ring-2 focus:ring-indigo-500 outline-none"
-                    />
-                    {errors.email && (
-                      <span className="text-rose-400 text-xs mt-1">
-                        {errors.email}
-                      </span>
-                    )}
-                  </label>
-                </div>
-
-                {/* Phone */}
-                <label className="flex flex-col">
-                  <span className="text-xs text-gray-300 mb-2">
-                    Phone (optional)
-                  </span>
-                  <input
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    placeholder="+92 3xx xxx xxxx"
-                    className="px-4 py-3 rounded-lg bg-gray-900/70 border border-gray-800 focus:ring-2 focus:ring-indigo-500 outline-none"
-                  />
-                  {errors.phone && (
-                    <span className="text-rose-400 text-xs mt-1">
-                      {errors.phone}
-                    </span>
-                  )}
-                </label>
-
-                {/* Message */}
-                <label className="flex flex-col">
-                  <span className="text-xs text-gray-300 mb-2">Message</span>
-                  <textarea
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    rows={5}
-                    placeholder="Tell us about your project, timeline, and budget"
-                    className="px-4 py-3 rounded-lg bg-gray-900/70 border border-gray-800 focus:ring-2 focus:ring-indigo-500 outline-none resize-none"
-                  />
-                  {errors.message && (
-                    <span className="text-rose-400 text-xs mt-1">
-                      {errors.message}
-                    </span>
-                  )}
-                </label>
-
-                {/* Button */}
-                <div className="flex justify-center mt-4">
-                  <button
-                    type="submit"
-                    disabled={submitted}
-                    className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:scale-[1.02] transition-transform disabled:opacity-60"
-                  >
-                    {submitted ? (
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="white"
-                          strokeWidth="4"
-                          fill="none"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="white"
-                          d="M4 12a8 8 0 018-8v8z"
-                        />
-                      </svg>
-                    ) : (
-                      "Send message"
-                    )}
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            {/* Map */}
-            <div className="rounded-2xl overflow-hidden border border-gray-800">
-              <div className="w-full h-56 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-gray-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-10 h-10 opacity-40"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 21s8-4.5 8-10.5S15.866 2 12 7.5 4 10.5 4 10.5 4 16.5 12 21z"
-                  />
-                  <circle
-                    cx="12"
-                    cy="10.5"
-                    r="2.3"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="ml-3 text-sm text-gray-400">
-                  Map placeholder — add Google Maps iframe here
-                </span>
-              </div>
-
-              <div className="p-4 bg-black/60 flex flex-col sm:flex-row items-center justify-between gap-2">
-                <div className="text-xs text-gray-400 text-center sm:text-left">
-                  Want a meeting? Book a call and we’ll walk through the scope.
-                </div>
-                <a href="#" className="text-sm text-indigo-300 underline">
-                  Book a call
-                </a>
-              </div>
+          {/* Bottom Premium Map Section */}
+          <div
+            className="mt-16 rounded-[32px] overflow-hidden border border-white/10
+  bg-white/[0.03] backdrop-blur-2xl"
+          >
+            <div className="relative w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[520px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d831.7694576863308!2d73.09507226953077!3d33.499352116672576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzPCsDI5JzU3LjciTiA3M8KwMDUnNDQuNiJF!5e0!3m2!1sen!2s!4v1777570889096!5m2!1sen!2s"
+                className="absolute inset-0 w-full h-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }
